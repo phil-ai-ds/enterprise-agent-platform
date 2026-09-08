@@ -1,4 +1,4 @@
-# Enterprise Agent Platform —— 部署镜像（保持仓库结构）
+# Enterprise Agent Platform —— 部署镜像（Vercel Docker / Railway / 任意容器平台）
 FROM python:3.11-slim
 
 WORKDIR /app
@@ -13,12 +13,11 @@ RUN pip install --no-cache-dir -r /app/backend/requirements.txt
 COPY backend/app /app/backend/app
 COPY frontend /app/frontend
 
-# 运行时数据落在 /data（Railway Volume 挂载；本地 docker 亦可用 -v）
-ENV EAP_DATA_DIR=/data \
-    EAP_DATABASE_URL=sqlite:////data/eap.db \
+# 数据落在 /tmp（serverless 容器无持久盘，冷启动 seed 重建演示数据；带 Volume 平台可改挂 /data）
+ENV EAP_DATA_DIR=/tmp/eap-data \
+    EAP_DATABASE_URL=sqlite:////tmp/eap.db \
     EAP_FRONTEND_DIR=/app/frontend
 
-VOLUME /data
 EXPOSE 8000
 
-CMD ["sh", "-c", "cd /app/backend && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+CMD ["sh", "-c", "cd /app/backend && uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
