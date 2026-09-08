@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enterprise Agent Platform</title>
+<link rel="stylesheet" href="/app.css">
+</head>
+<body>
+<div id="login" class="login-wrap">
+  <div class="login-card">
+    <div class="brand-row"><span class="logo">◆</span><span class="brand-name">Enterprise Agent Platform</span></div>
+    <h1 class="login-title">构建 · 运行 · 迭代你的 Agent</h1>
+    <p class="login-sub">对话式创建 Agent · 个人/团队/组织工作区 · 技能版本化与发布 · 反思式自我迭代</p>
+    <div class="field"><label>用户名</label><input id="lu" autocomplete="username" placeholder="username"></div>
+    <div class="field"><label>密码</label><input id="lp" type="password" autocomplete="current-password" placeholder="••••••••"></div>
+    <button class="btn btn-primary btn-block" onclick="login()">登 录</button>
+    <div class="login-demo">
+      <span class="mut">演示账号（密码 demo123）</span>
+      <div class="row center" style="gap:6px;margin-top:6px">
+        <button class="btn btn-ghost btn-sm" onclick="fill('admin')">admin</button>
+        <button class="btn btn-ghost btn-sm" onclick="fill('alice')">alice</button>
+        <button class="btn btn-ghost btn-sm" onclick="fill('bob')">bob</button>
+      </div>
+    </div>
+    <div id="lerr" class="error-text"></div>
+  </div>
+</div>
+
+<div id="app" class="layout">
+  <aside class="sidebar">
+    <div class="side-brand"><span class="logo">◆</span><span>EAP</span></div>
+    <nav class="nav" id="nav"></nav>
+    <div class="side-user">
+      <div class="avatar" id="myAvatar">?</div>
+      <div style="min-width:0;flex:1"><div class="side-user-name" id="sideName"></div><div class="side-user-team" id="sideTeam"></div></div>
+      <button class="btn btn-ghost btn-sm" id="logoutBtn" title="退出登录" onclick="logout()" style="padding:4px 8px;flex-shrink:0">⎋ 退出</button>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div><h2 id="title"></h2><div class="mut small" id="subtitle"></div></div>
+      <div class="row center" id="topActions"></div>
+    </header>
+    <div id="view"></div>
+  </main>
+</div>
+
+<!-- 全局 Modal -->
+<div id="modal-mask" class="modal-mask" style="display:none" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modalBox"></div>
+</div>
+<div id="toast" class="toast" style="display:none"></div>
+
+<script src="/app.js"></script>
+</body>
+</html>
