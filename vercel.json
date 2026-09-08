@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "functions": {
+    "api/index.py": {
+      "maxDuration": 60,
+      "runtime": "python3.11"
+    }
+  },
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/index.py" },
+    { "src": "/", "dest": "/frontend/index.html" },
+    { "src": "/app\\.(css|js)", "dest": "/frontend/app.$1" },
+    { "src": "/docs/(.*)", "dest": "/docs/$1" },
+    { "src": "/((?!api|docs|app\\.|$).*)", "dest": "/frontend/index.html" }
+  ]
+}

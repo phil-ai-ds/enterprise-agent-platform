@@ -1,0 +1,6 @@
+.git
+.venv
+backend/data
+backend/eap.db
+*.sqlite
+.env
